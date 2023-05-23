@@ -4,10 +4,6 @@ from django.contrib.auth.models import User
 
 
 class LoginForm(AuthenticationForm):
-    class Meta:
-        model = User
-        fields = ('username', 'password')
-
     username = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Your Username',
         'class': 'w-full py-4 px-6 rounded-xl'
