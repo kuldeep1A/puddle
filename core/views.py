@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from item.models import Category, Item
-from .forms import SignupForm
+from .forms import SignupForm, LoginForm
 
 
 def index(request):
@@ -25,3 +25,12 @@ def signup(request):
     else:
         form = SignupForm()
     return render(request, 'core/signup.html', dict(form=form))
+
+
+def login(request):
+    if request.method == 'GET':
+        form = LoginForm(request.GET)
+        if form.is_valid():
+            return redirect('')
+    form = LoginForm()
+    return render(request, 'core/login.html', dict(form=form))
