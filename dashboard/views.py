@@ -5,5 +5,7 @@ from item.models import Item
 
 @login_required
 def index(request):
-    item =
+    item = Item.objects.filter(created_by=request.user)
+
+    return render(request, 'dashboard/index.html', dict(item=item))
 
