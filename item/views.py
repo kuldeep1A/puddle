@@ -29,12 +29,11 @@ def new(request):
 
 
 @login_required
-def edit(request):
+def edit(request, pk):
     item = get_object_or_404(Item, pk=pk, created_by=request.user)
     if request.method == 'POST':
         form = EditItemForm(request.POST, request.FILES, instance=item)
         if form.is_valid():
-            item = form.save(commit=False)
             item.save()
             return redirect('item:detail', pk=item.pk)
     else:
