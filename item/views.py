@@ -1,16 +1,22 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Item
+from .models import Item, Category
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .forms import NewItemForm, EditItemForm
 
 
 def browse(request):
     query = request.GET.get('query', '')
+    category_id = request.GET.get('category', 0)
+    categories = Category.objects.all()
     items = Item.objects.filter(is_sold=False)
+    if category_id:
+        items = items.filter(Category=category_id)
     if query:
-        items = items.filter(name__icontains=query)
+        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
-    return render(request, 'item/browse.html', dict(items=items, query=query))
+    return render(request, 'item/browse.html', dict(items=items, query=query, categories=categories,
+                                                    category_id=int(category_id)))
 
 
 def detail(request, pk):
