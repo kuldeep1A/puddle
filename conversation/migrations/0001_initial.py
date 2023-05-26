@@ -34,8 +34,10 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('conversation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='message', to='conversation.conversation')),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='created_messages', to=settings.AUTH_USER_MODEL)),
+                ('conversation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages',
+                                                   to='conversation.conversation')),
+                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                                 related_name='created_messages', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
