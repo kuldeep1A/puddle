@@ -1,3 +1,5 @@
 # puddle
 Marketplace 
-Size of 4.1 mb only
+A Multi-lingual E-Commerce website built with Django and Python
+
+Size of 5+ mb only
